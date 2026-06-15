@@ -12,12 +12,12 @@ public class InventoryManager : MonoBehaviour
     UnityMainThreadDispatcher dispatcher;
 
     [Header("Firebase")]
-    [SerializeField] string databaseUrl = "https://myproject-76240-default-rtdb.asia-southeast1.firebasedatabase.app/";
+    [SerializeField] string databaseUrl = "https://shingutest-5294a-default-rtdb.asia-southeast1.firebasedatabase.app/";
 
     [Header("UI")]
-    [SerializeField] Text PotionCountText;
-    [SerializeField] Text BombCountText;
-    [SerializeField] Text TicketCountText;
+    [SerializeField] Text ManaCrystalCountText;
+    [SerializeField] Text SpellScrollCountText;
+    [SerializeField] Text PhoenixFeatherCountText;
     [SerializeField] Text MessageText;
 
     string userKey;
@@ -82,9 +82,9 @@ public class InventoryManager : MonoBehaviour
 
     void RefreshUI()
     {
-        PotionCountText.text = "Potion : " + GetItemCount("Potion");
-        BombCountText.text = "Bomb : " + GetItemCount("Bomb");
-        TicketCountText.text = "Ticket : " + GetItemCount("Ticket");
+        ManaCrystalCountText.text = "마나 크리스탈: " + GetItemCount("ManaCrystal") + "개";
+        SpellScrollCountText.text = "주문서: " + GetItemCount("SpellScroll") + "개";
+        PhoenixFeatherCountText.text = "불사조 깃털: " + GetItemCount("PhoenixFeather") + "개";
     }
 
     int GetItemCount(string itemName)
@@ -97,19 +97,31 @@ public class InventoryManager : MonoBehaviour
         return 0;
     }
 
-    public void OnClickUsePotion()
+    // 아이템별로 사용 메시지를 다르게 출력 (과제 필수 조건)
+    string GetUseMessage(string itemName)
     {
-        UseItem("Potion");
+        switch (itemName)
+        {
+            case "ManaCrystal": return "마나 크리스탈을 흡수해 마나가 가득 찼다!";
+            case "SpellScroll": return "주문서를 펼쳐 마법을 시전했다!";
+            case "PhoenixFeather": return "불사조의 깃털이 빛나며 부활의 가호를 받았다!";
+            default: return itemName + " 사용 완료";
+        }
     }
 
-    public void OnClickUseBomb()
+    public void OnClickUseManaCrystal()
     {
-        UseItem("Bomb");
+        UseItem("ManaCrystal");
     }
 
-    public void OnClickUseTicket()
+    public void OnClickUseSpellScroll()
     {
-        UseItem("Ticket");
+        UseItem("SpellScroll");
+    }
+
+    public void OnClickUsePhoenixFeather()
+    {
+        UseItem("PhoenixFeather");
     }
 
     void UseItem(string itemName)
@@ -147,7 +159,7 @@ public class InventoryManager : MonoBehaviour
                 dispatcher.Enqueue(() =>
                 {
                     RefreshUI();
-                    MessageText.text = usedItemName + " 사용 완료";
+                    MessageText.text = GetUseMessage(usedItemName);
                 });
             });
     }

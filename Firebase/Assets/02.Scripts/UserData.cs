@@ -32,9 +32,9 @@ public class UserData
         }
 
         Dictionary<string, int> inventory = new Dictionary<string, int>();
-        inventory["Potion"] = 0;
-        inventory["Bomb"] = 0;
-        inventory["Ticket"] = 0;
+        inventory["ManaCrystal"] = 0;
+        inventory["SpellScroll"] = 0;
+        inventory["PhoenixFeather"] = 0;
 
         UnitList = JsonConvert.SerializeObject(unitList);
         Inventory = JsonConvert.SerializeObject(inventory);

@@ -104,3 +104,7 @@ InitTestScene*.unity*
 
 # Auto-generated cache in Assets folder
 /[Aa]ssets/[Ss]ceneDependencyCache*
+
+# Firebase SDK (대용량 네이티브 라이브러리 — git에 올리지 않음, 각자 임포트)
+/[Aa]ssets/Firebase/
+/[Aa]ssets/Firebase.meta

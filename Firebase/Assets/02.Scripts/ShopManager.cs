@@ -12,7 +12,7 @@ public class ShopManager : MonoBehaviour
     UnityMainThreadDispatcher dispatcher;
 
     [Header("Firebase")]
-    [SerializeField] string databaseUrl = "https://myproject-76240-default-rtdb.asia-southeast1.firebasedatabase.app/";
+    [SerializeField] string databaseUrl = "https://shingutest-5294a-default-rtdb.asia-southeast1.firebasedatabase.app/";
 
     [Header("UI")]
     [SerializeField] Text CoinText;
@@ -73,22 +73,22 @@ public class ShopManager : MonoBehaviour
 
     void RefreshUI()
     {
-        CoinText.text = "Coin : " + currentCoin;
+        CoinText.text = "보유 코인: " + currentCoin + " G";
     }
 
-    public void OnClickBuyPotion()
+    public void OnClickBuyManaCrystal()
     {
-        BuyItem("Potion", 100);
+        BuyItem("ManaCrystal", 120);
     }
 
-    public void OnClickBuyBomb()
+    public void OnClickBuySpellScroll()
     {
-        BuyItem("Bomb", 200);
+        BuyItem("SpellScroll", 200);
     }
 
-    public void OnClickBuyTicket()
+    public void OnClickBuyPhoenixFeather()
     {
-        BuyItem("Ticket", 300);
+        BuyItem("PhoenixFeather", 400);
     }
 
     void BuyItem(string itemName, int price)

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "728525035423",
+    "project_id": "shingutest-5294a",
+    "storage_bucket": "shingutest-5294a.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:728525035423:android:d138f1ed9776d14b49cfaa",
+        "android_client_info": {
+          "package_name": "com.UnityTechnologies.com.unity.template.urpblank"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfNIHkiSsLkdJdZMmdiIpyXI5L98-DJJ0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
