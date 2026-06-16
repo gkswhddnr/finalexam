@@ -8,6 +8,21 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/01.Scenes/LoginScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/01.Scenes/AuctionScene.unity
+    guid: 8df96383f71e28640aedb1f9d62c0da3
+  - enabled: 1
+    path: Assets/01.Scenes/GameResultScene.unity
+    guid: 04ba5e224e4e8fc45bd3d99d2dfd8bb1
+  - enabled: 1
+    path: Assets/01.Scenes/InventoryScene.unity
+    guid: 72333c372c670014e992b466cac92b7a
+  - enabled: 1
+    path: Assets/01.Scenes/ShopScene.unity
+    guid: ca57a024b01c5ff45b58e5aed8136444
+  - enabled: 1
+    path: Assets/01.Scenes/UnitScene.unity
+    guid: 209026a6bc7106d42b69b5e575f39eb5
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0

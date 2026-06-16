@@ -152,8 +152,8 @@ MonoBehaviour:
   databaseUrl: https://shingutest-5294a-default-rtdb.asia-southeast1.firebasedatabase.app/
   NickNameInput: {fileID: 1895507487}
   CheckText: {fileID: 1623762976}
-  NextSceneName: MainScene
-  LoadNextSceneAfterRegister: 0
+  NextSceneName: ShopScene
+  LoadNextSceneAfterRegister: 1
 --- !u!4 &133839779
 Transform:
   m_ObjectHideFlags: 0
@@ -184,8 +184,8 @@ MonoBehaviour:
   databaseUrl: https://shingutest-5294a-default-rtdb.asia-southeast1.firebasedatabase.app/
   NickNameInput: {fileID: 1895507487}
   CheckText: {fileID: 1623762976}
-  NextSceneName: MainScene
-  LoadNextSceneAfterLogin: 0
+  NextSceneName: ShopScene
+  LoadNextSceneAfterLogin: 1
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
