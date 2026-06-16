@@ -1,0 +1,73 @@
+Firebase 게임 유저 데이터 관리 시스템 - 구현 설명 문서
+
+제출자 : 한종욱
+환경   : Unity 6000.3.10f1 (URP), Firebase Realtime Database, Newtonsoft.Json, UnityMainThreadDispatcher
+
+
+씬 구성
+
+- LoginScene      : 회원가입 / 로그인 (게임 시작 씬, 로그인 성공 시 상점으로 이동)
+- ShopScene       : 아이템 구매
+- InventoryScene  : 아이템 개수 표시 및 사용
+- UnitScene       : 유닛 구매 (심화 1)
+- GameResultScene : 게임 결과 저장 (심화 2)
+- AuctionScene    : 거래소 판매 및 구매 (심화 3)
+
+
+1. 구현한 기능
+
+- 필수  : 회원가입, 로그인, 코인 불러오기, 아이템 구매, 인벤토리 표시, 아이템 사용
+- 심화1 : 유닛 구매 (이미 보유한 유닛은 재구매 불가)
+- 심화2 : 게임 결과 저장 (게임 종료 시 보상 코인 지급, 기존보다 높은 경우에만 최고 점수 갱신)
+- 심화3 : 거래소 (아이템 판매 등록 및 다른 유저의 구매. 구매 시 구매자 코인 차감과 인벤 증가, 판매자 코인 증가, 판매 완료 처리)
+
+
+2. 사용한 아이템 (기본 예시 Potion / Bomb / Ticket 에서 변경)
+
+- ManaCrystal (마나 크리스탈) : 마나 회복 소모품
+- SpellScroll (주문서)        : 마법 시전 소모품
+- PhoenixFeather (불사조 깃털) : 부활 효과 희귀 아이템
+
+
+3. 아이템 가격표
+
+ 아이템           구매 가격   사용 메시지
+ ManaCrystal      120         마나 크리스탈을 흡수해 마나가 가득 찼다!
+ SpellScroll      200         주문서를 펼쳐 마법을 시전했다!
+ PhoenixFeather   400         불사조의 깃털이 빛나며 부활의 가호를 받았다!
+
+ 유닛 (심화 1) : Unit2 = 150, Unit3 = 250, Unit4 = 350
+
+
+4. Firebase 데이터 구조
+
+ UserInfo / {userKey} / NickName, Coin, Score, UnitList, Inventory
+ AuctionList / {auctionKey} / AuctionKey, SellerKey, SellerNickName, ItemName, Count, Price, IsSold
+
+- Coin, Score 는 숫자로 저장됩니다.
+- UnitList, Inventory 는 Dictionary 를 JSON 문자열로 변환하여 저장합니다.
+  예) Inventory : {"ManaCrystal":1,"SpellScroll":0,"PhoenixFeather":0}
+
+
+5. PlayerPrefs 저장 값
+
+- UserKey      : 유저 고유 키. 로그인 이후 모든 화면이 이 키로 본인 데이터에 접근합니다.
+- UserNickName : 닉네임. 경매 판매자 표시 등에 사용합니다.
+
+
+6. Inventory JSON 처리 방식
+
+- Dictionary 는 Firebase 및 JsonUtility 로 직접 저장되지 않습니다.
+- 저장 시 JsonConvert.SerializeObject 로 JSON 문자열로 변환하여 저장합니다.
+- 불러올 때 JsonConvert.DeserializeObject 로 다시 Dictionary 로 복원합니다.
+- UserData 모델 전체는 JsonUtility.ToJson 을 사용하며, 이처럼 두 직렬화기를 함께 사용합니다.
+
+
+7. 실행 중 발생한 문제와 해결
+
+- Firebase 콜백이 백그라운드 스레드에서 실행되어 UI 를 직접 변경할 수 없었습니다.
+  UnityMainThreadDispatcher.Enqueue 로 메인 스레드에서 UI 를 갱신하여 해결하였습니다.
+- 다운로드한 Firebase SDK 버전이 수업에서 안내된 버전과 달라, 해당 버전에는 Newtonsoft.Json 이 기본 포함되어 있지 않아 컴파일 오류가 발생하였습니다.
+  Package Manager 에서 com.unity.nuget.newtonsoft-json 을 추가하여 해결하였습니다.
+- UI 요소가 화면 중앙에 겹쳐 표시되었습니다.
+  각 요소의 RectTransform 위치를 조정하여 분리하였습니다.
